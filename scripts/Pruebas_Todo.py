@@ -6,6 +6,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+# CAMBIAR SI ES NECESARIO
 BASE_DIR = r"C:\Users\tutan\Downloads\epidemia_sir"
 SEQ_DIR = os.path.join(BASE_DIR, "scripts", "output_seq")
 PAR_DIR = os.path.join(BASE_DIR, "scripts", "output_par")
@@ -21,7 +22,7 @@ os.makedirs(os.path.dirname(CSV_FILE), exist_ok=True)
 
 
 
-# PARÁMETROS
+# PARAMETROS
 N = 1000
 dias = 365
 infectados = 10
@@ -52,7 +53,7 @@ print(f"Tiempo secuencial: {t_seq:.2f}s")
 
 
 
-# EJECUCIÓN PARALELA
+# EJECUCION PARALELA
 par_exe = os.path.join(BASE_DIR, "paralelo", "sir_par.exe")
 cores_list = [1, 2, 4, 8]
 tiempos_paralelo = []
@@ -94,7 +95,7 @@ for f in seq_files:
     cv2.imwrite(out_path, merged)
     merged_images.append(out_path)
 
-print(f"✔ {len(merged_images)} imagenes fusionadas.")
+print(f"{len(merged_images)} imagenes fusionadas.")
 print("Generando video")
 
 first = cv2.imread(merged_images[0])
@@ -109,11 +110,6 @@ for img_path in merged_images:
 video.release()
 
 print(f"Video generado: {VIDEO_FILE}")
-
-
-# ------------------------------------------------------------
-# CALCULAR SPEED-UP CORRECTO
-# ------------------------------------------------------------
 speedup = [t_seq / t for t in tiempos_paralelo]
 
 plt.figure(figsize=(6,5))
